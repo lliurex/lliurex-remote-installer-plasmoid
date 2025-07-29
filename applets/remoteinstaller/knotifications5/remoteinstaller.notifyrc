@@ -1,0 +1,18 @@
+[Global]
+IconName=lliurex_remote_installer_plugin
+Comment=Lliurex Remote Installer
+Comment[ca@valencia]=Lliurex Remote Installer
+Comment[es]=Lliurex Remote Installer
+
+
+[Event/Run]
+Name=LliureX Remote Installer is running
+Name[ca@valencia]=El LliureX Remote Installer està  en execució
+Name[ca]=El LliureX Remote Installer està  en execució
+Name[es]=LliureX Remote Installer se està ejecutando
+
+Comment=Occurs when LliureX Remote Installer is running
+Comment[ca@valencia]=Ocorre quan el LliureX Remote Installer està  en execució
+Comment[ca@valencia]=Ocorre quan el LliureX Remote Installer està  en execució
+Comment[es]=Ocurre cuando LliureX Remote Installer se està ejecutando
+Action=Popup

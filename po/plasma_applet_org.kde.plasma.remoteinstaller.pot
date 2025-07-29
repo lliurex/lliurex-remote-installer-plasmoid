@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the remoteinstaller package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: remoteinstaller \n"
+"Report-Msgid-Bugs-To: http://lliurex.net\n"
+"POT-Creation-Date: 2025-07-29 10:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:36
+#, kde-format
+msgid "Is not running"
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:139
+#, kde-format
+msgid "Last execution: "
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:157
+#, kde-format
+msgid "LliureX Remote Installer"
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:161
+#, kde-format
+msgid "Is running: "
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:166
+#, kde-format
+msgid "Executable Mode"
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:172
+#, kde-format
+msgid "Apt Mode"
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:177
+#, kde-format
+msgid "Deb Mode"
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:182
+#, kde-format
+msgid "EPI Mode"
+msgstr ""

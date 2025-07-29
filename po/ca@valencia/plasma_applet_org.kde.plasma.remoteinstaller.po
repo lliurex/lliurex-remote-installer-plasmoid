@@ -1,0 +1,58 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# lliurex <lliurex@lliurex.net>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: http://lliurex.net\n"
+"POT-Creation-Date: 2025-07-29 10:48+0200\n"
+"PO-Revision-Date: 2025-07-29 10:53+0200\n"
+"Last-Translator: lliurex <lliurex@lliurex.net>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca@valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:36
+#, kde-format
+msgid "Is not running"
+msgstr "No està en execució"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:139
+#, kde-format
+msgid "Last execution: "
+msgstr "Última execució: "
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:157
+#, kde-format
+msgid "LliureX Remote Installer"
+msgstr "LliureX Remote Installer"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:161
+#, kde-format
+msgid "Is running: "
+msgstr "Està en execució: "
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:166
+#, kde-format
+msgid "Executable Mode"
+msgstr "Mode Executable"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:172
+#, kde-format
+msgid "Apt Mode"
+msgstr "Mode Apt"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:177
+#, kde-format
+msgid "Deb Mode"
+msgstr "Mode Deb"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:182
+#, kde-format
+msgid "EPI Mode"
+msgstr "Mode EPI"
