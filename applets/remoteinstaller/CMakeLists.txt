@@ -28,7 +28,8 @@ target_link_libraries(remoteinstallerplugin
 
 install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/remoteinstaller)
 install(TARGETS remoteinstallerplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/remoteinstaller)
+
 install(FILES "icons/remote_installer_plugin.svg"
         DESTINATION ${DATAROOTDIR}/usr/share/icons/hicolor/scalable/apps/)
 install(FILES "knotifications5/remoteinstaller.notifyrc"
-       DESTINATION ${DATAROOTDIR}/usr/share/knotifications5/)
+        DESTINATION ${DATAROOTDIR}/usr/share/knotifications5/)   

@@ -13,7 +13,7 @@ Item {
 
     id:remoteInstallerApplet
     
-    RemoteInstallerWigdet{
+    RemoteInstallerWidget{
         id:remoteInstallerWidget
 
     }
@@ -22,9 +22,9 @@ Item {
     Plasmoid.status: {
         /* Warn! Enum types are accesed through ClassName not ObjectName */
         switch (remoteInstallerWidget.status){
-            case RemoteInstallerWigdet.ActiveStatus:
+            case RemoteInstallerWidget.ActiveStatus:
                 return PlasmaCore.Types.ActiveStatus
-            case RemoteInstallerWigdet.PassiveStatus:
+            case RemoteInstallerWidget.PassiveStatus:
                 return PlasmaCore.Types.PassiveStatus
            
         }

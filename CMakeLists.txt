@@ -27,6 +27,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma I18n Notification
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fexceptions")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -foperator-names")
 
+
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                         URL "http://www.x.org"

@@ -22,7 +22,7 @@ RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
 {
     
 	cleanCache();
-    WATCH_DIR=refPath;
+    WATCH_DIR.setPath(refPath);
     QString sh_token_path=WATCH_DIR.absoluteFilePath("llxremote_sh_token");
     llxremote_sh.setFileName(sh_token_path);
     QString apt_token_path=WATCH_DIR.absoluteFilePath("llxremote_apt_token");
@@ -33,14 +33,15 @@ RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     llxremote_epi.setFileName(epi_token_path);
 
 
-    QString titleTail=i18n("Is not running");
-    setSubToolTip(titleTail);
+    notificationBody=i18n("Is not running");
+    setSubToolTip(notificationBody);
     initWatcher();
    
 }
 
 void RemoteInstallerWidget::cleanCache(){
 
+    user=qgetenv("USER");
     QFile CURRENT_VERSION_TOKEN;
     QDir cacheDir("/home/"+user+"/.cache/plasmashell/qmlcache");
     QString currentVersion="";
@@ -148,7 +149,7 @@ void RemoteInstallerWidget::isAlive(){
 				llxremote_mode="deb";
 			}else{
 				if (RemoteInstallerWidget::llxremote_epi.exists()){
-					llxremote_mode="epi"
+					llxremote_mode="epi";
 				}
 			}
 		}
@@ -178,12 +179,16 @@ void RemoteInstallerWidget::checkRemoteInstaller(){
 			}	
 
 		}else{
-			if (!RemoteInstallerWidget::llxremote_deb.exists()){
-				stop_widget=true;
-			}else{
-				if (!RemoteInstallerWidget::llxremote_epi.exists()){
+			if (llxremote_mode=="deb"){
+				if (!RemoteInstallerWidget::llxremote_deb.exists()){
 					stop_widget=true;
 				}
+			}else{
+				if (llxremote_mode=="epi"){
+					if (!RemoteInstallerWidget::llxremote_epi.exists()){
+						stop_widget=true;
+					}
+				}			
 			}
 	    }
 	 } 
@@ -191,12 +196,12 @@ void RemoteInstallerWidget::checkRemoteInstaller(){
 	 if (stop_widget){
 	 	m_timer_run->stop();
 	    is_working=false;
-	    QDate currentDate=QDate.currentDate();
+	    QDate currentDate=QDate::currentDate();
 	    QString lastDay=currentDate.toString(Qt::ISODate);
-	    QTime currentTime=QTime.currentTime();
-	    QString lastTime=curretTime.toString(Qt::ISODate);
-	    QString titleTail=i18n("Last execution: ")+lastDay+" - "+lastTime;
-	    setSubToolTip(titleTail);
+	    QTime currentTime=QTime::currentTime();
+	    QString lastTime=currentTime.toString(Qt::ISODate);
+	    notificationBody=i18n("Last execution: ")+lastDay+" - "+lastTime;
+	    setSubToolTip(notificationBody);
 	    setStatus(PassiveStatus);
 
 	 }      	
@@ -214,7 +219,7 @@ RemoteInstallerWidget::TrayStatus RemoteInstallerWidget::status() const
 void RemoteInstallerWidget::changeTryIconState(QString mode){
 
     const QString tooltip(i18n("LliureX Remote Installer"));
-    setStatus(NeedsAttentionStatus);
+    setStatus(ActiveStatus);
     setIconName("remote_installer_plugin");
     setToolTip(tooltip);
     QString title(i18n("Is running: "));
@@ -222,24 +227,20 @@ void RemoteInstallerWidget::changeTryIconState(QString mode){
     bool show_notification=false;
 
 	if (mode=="sh"){
-		QString sh_label(i18n("Executable Mode"));
-		const QString subtooltip(title+sh_label);
+		notificationBody=i18n("Executable Mode");
 		show_notification=true;
 	       
 	}else{
 	  	if (mode=="apt"){
-			QString apt_label(i18n("Apt Mode"));
-	   		const QString subtooltip(title+apt_label);
+			notificationBody=i18n("Apt Mode");
 	   		show_notification=true;
 	   	}else{
 	   		if (mode=="deb"){
-				QString deb_label(i18n("Deb Mode"));
-	  			const QString subtooltip(title+deb_label);
+				notificationBody=i18n("Deb Mode");
 	  			show_notification=true;
  	        }else{
 	        	if (mode=="epi"){
-	        		QString deb_label(i18n("EPI Mode"));
-	  				const QString subtooltip(title+deb_label);
+	        		notificationBody=i18n("EPI Mode");
 	  				show_notification=true;
 	        	}
 	        }
@@ -247,8 +248,8 @@ void RemoteInstallerWidget::changeTryIconState(QString mode){
 	}
 
 	if (show_notification){
-		setSubToolTip(subtooltip);
-        notification = KNotification::event(QStringLiteral("Run"), subtooltip, {}, "lliurex-remote-installer-indicator", nullptr, KNotification::CloseOnTimeout , QStringLiteral("llxremoteinstallernotifier"));
+		setSubToolTip(title+notificationBody);
+        notification = KNotification::event(QStringLiteral("Run"), title+notificationBody, {}, "remote_installer_plugin", nullptr, KNotification::CloseOnTimeout , QStringLiteral("remoteinstaller"));
 	}
       
 }

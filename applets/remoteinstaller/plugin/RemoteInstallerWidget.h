@@ -67,6 +67,10 @@ signals:
  
 private:
 
+    void cleanCache();
+    QString getInstalledVersion();
+    void initWatcher();
+
     QTimer *m_timer_run=nullptr;
     TrayStatus m_status = PassiveStatus;
     QString m_iconName = QStringLiteral("remote_installer_plugin");
@@ -82,10 +86,8 @@ private:
     QPointer<KNotification> notification;
     QFileSystemWatcher *watcher = nullptr;
     QString refPath="/tmp/.LLXRemoteInstallerClient";
-
-    void cleanCache();
-
-     
+    QString user;
+    QString notificationBody;
 };
 
 #endif // PLASMA_REMOTE_INSTALLER_WIDGET_H
