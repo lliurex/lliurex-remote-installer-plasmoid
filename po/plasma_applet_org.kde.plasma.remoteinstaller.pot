@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: remoteinstaller \n"
 "Report-Msgid-Bugs-To: http://lliurex.net\n"
-"POT-Creation-Date: 2025-07-29 10:48+0200\n"
+"POT-Creation-Date: 2025-07-30 10:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,52 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:36
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:36
 #, kde-format
 msgid "Is not running"
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:139
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:174
 #, kde-format
 msgid "Last execution: "
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:157
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:174
+#, kde-format
+msgid "Last action executed: "
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:175
+#, kde-format
+msgid "Has finished executing the actions"
+msgstr ""
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:194
 #, kde-format
 msgid "LliureX Remote Installer"
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:161
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:198
 #, kde-format
-msgid "Is running: "
+msgid "Executing action type: "
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:166
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:203
 #, kde-format
-msgid "Executable Mode"
+msgid "EXECUTABLES"
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:172
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:208
 #, kde-format
-msgid "Apt Mode"
+msgid "APT"
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:177
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:212
 #, kde-format
-msgid "Deb Mode"
+msgid "DEB"
 msgstr ""
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:182
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:216
 #, kde-format
-msgid "EPI Mode"
+msgid "ZMD"
 msgstr ""

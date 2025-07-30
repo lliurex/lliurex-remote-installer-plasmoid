@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: http://lliurex.net\n"
-"POT-Creation-Date: 2025-07-29 10:48+0200\n"
-"PO-Revision-Date: 2025-07-29 10:53+0200\n"
+"POT-Creation-Date: 2025-07-30 10:18+0200\n"
+"PO-Revision-Date: 2025-07-30 10:19+0200\n"
 "Last-Translator: lliurex <lliurex@lliurex.net>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,42 +17,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:36
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:36
 #, kde-format
 msgid "Is not running"
 msgstr "No està en execució"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:139
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:174
 #, kde-format
 msgid "Last execution: "
 msgstr "Última execució: "
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:157
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:174
+#, kde-format
+msgid "Last action executed: "
+msgstr "Última acció executada: "
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:175
+#, kde-format
+msgid "Has finished executing the actions"
+msgstr "Ha acabat d'executar les acciones"
+
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:194
 #, kde-format
 msgid "LliureX Remote Installer"
 msgstr "LliureX Remote Installer"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:161
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:198
 #, kde-format
-msgid "Is running: "
-msgstr "Està en execució: "
+msgid "Executing action type: "
+msgstr "S'està executant l'acció tipus: "
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:166
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:203
 #, kde-format
-msgid "Executable Mode"
-msgstr "Mode Executable"
+msgid "EXECUTABLES"
+msgstr "EXECUTABLES"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:172
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:208
 #, kde-format
-msgid "Apt Mode"
-msgstr "Mode Apt"
+msgid "APT"
+msgstr "APT"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:177
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:212
 #, kde-format
-msgid "Deb Mode"
-msgstr "Mode Deb"
+msgid "DEB"
+msgstr "DEB"
 
-#: ../applets/remoteinstaller/plugin/RemoteInstallerWiget.cpp:182
+#: ../applets/remoteinstaller/plugin/RemoteInstallerWidget.cpp:216
 #, kde-format
-msgid "EPI Mode"
-msgstr "Mode EPI"
+msgid "ZMD"
+msgstr "ZMD"

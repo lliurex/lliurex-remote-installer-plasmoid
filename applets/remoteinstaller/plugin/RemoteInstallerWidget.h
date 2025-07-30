@@ -88,6 +88,7 @@ private:
     QString refPath="/tmp/.LLXRemoteInstallerClient";
     QString user;
     QString notificationBody;
+    QString notificationAction;
 };
 
 #endif // PLASMA_REMOTE_INSTALLER_WIDGET_H
