@@ -1,0 +1,5 @@
+usr/lib/*/qt5/qml/org/kde/plasma/private/remoteinstaller/
+usr/share/kservices5/plasma-applet-org.kde.plasma.remoteinstaller.desktop
+usr/share/metainfo/org.kde.plasma.remoteinstaller.appdata.xml
+usr/share/plasma/plasmoids/org.kde.plasma.remoteinstaller/
+usr/share/locale/*/*/*.mo
