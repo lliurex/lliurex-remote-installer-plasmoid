@@ -1,0 +1,41 @@
+Source: lliurex-remote-installer-indicator
+Section: kde
+Priority: optional
+Maintainer: Equipo LliureX <lliurex@gva.es>
+Build-Depends: cmake,
+               debhelper (>= 9),
+               extra-cmake-modules,
+               pkgconf,
+               libkf6plasma-dev,
+               libkf6i18n-dev,
+               pkg-config,
+               qt6-base-dev,
+               qt6-declarative-dev,
+               libkf6runner-dev,
+               libkf6notifications-dev,
+               libkf6kio-dev
+Standards-Version: 3.9.6
+Homepage: http://lliurex.net
+Vcs-Browser: https://svn.lliurex.net/jammy/lliurex-remote-installer-plasmoid
+Vcs-Git: https://github.com/lliurex/lliurex-remote-installer-plasmoid
+
+Package: lliurex-remote-installer-indicator
+Architecture: any
+Depends: kpackagetool5,
+         libkf5purpose5,
+         plasma-framework,
+         plasma-workspace,
+         qml-module-org-kde-draganddrop,
+         qml-module-org-kde-kcoreaddons,
+         qml-module-org-kde-kio,
+         qml-module-org-kde-purpose,
+         qml-module-qtgraphicaleffects,
+         qml-module-qtquick-layouts,
+         qml-module-qtquick-window2,
+         qml-module-qtwebengine,
+         qml-module-qtwebkit,
+	 aptdaemon,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: additional widgets for Plasma 5
+ This package provides a widget for LliureX-Remote-Installer

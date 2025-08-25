@@ -1,0 +1,13 @@
+Package: lliurex-remote-installer-indicator-dbgsym
+Package-Type: ddeb
+Source: lliurex-remote-installer-indicator
+Version: 1.0
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Equipo LliureX <lliurex@gva.es>
+Installed-Size: 713
+Depends: lliurex-remote-installer-indicator (= 1.0)
+Section: debug
+Priority: optional
+Description: debug symbols for lliurex-remote-installer-indicator
+Build-Ids: bedd797ff94b9bc4511772bb9763cae1d7c99bdb
