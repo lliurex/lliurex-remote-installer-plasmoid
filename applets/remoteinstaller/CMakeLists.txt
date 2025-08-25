@@ -31,5 +31,7 @@ install(TARGETS remoteinstallerplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/pla
 
 install(FILES "icons/remote_installer_plugin.svg"
         DESTINATION ${DATAROOTDIR}/usr/share/icons/hicolor/scalable/apps/)
+install(FILES "icons/remote_installer_plugin_app.svg"
+        DESTINATION ${DATAROOTDIR}/usr/share/icons/hicolor/scalable/apps/)
 install(FILES "knotifications5/remoteinstaller.notifyrc"
         DESTINATION ${DATAROOTDIR}/usr/share/knotifications5/)   
