@@ -83,7 +83,7 @@ private:
     QFile llxremote_epi;
     QString llxremote_mode;
     bool is_working=false;
-    QPointer<KNotification> notification;
+    QPointer<KNotification> m_notification;
     QFileSystemWatcher *watcher = nullptr;
     QString refPath="/tmp/.LLXRemoteInstallerClient";
     QString user;

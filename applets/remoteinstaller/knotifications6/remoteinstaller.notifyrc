@@ -2,6 +2,7 @@
 IconName=remote_installer_plugin_app
 Comment=Lliurex Remote Installer
 Comment[ca@valencia]=Lliurex Remote Installer
+Comment[ca]=Lliurex Remote Installer
 Comment[es]=Lliurex Remote Installer
 
 
@@ -16,3 +17,4 @@ Comment[ca@valencia]=Ocorre quan el LliureX Remote Installer està  en execució
 Comment[ca@valencia]=Ocorre quan el LliureX Remote Installer està  en execució
 Comment[es]=Ocurre cuando LliureX Remote Installer se està ejecutando
 Action=Popup
+Urgency=Normal

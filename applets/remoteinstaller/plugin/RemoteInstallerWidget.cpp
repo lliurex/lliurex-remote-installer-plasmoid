@@ -2,7 +2,6 @@
 #include <KLocalizedString>
 #include <KFormat>
 #include <KNotification>
-#include <KRun>
 #include <QTimer>
 #include <QRegularExpression>
 #include <QStandardPaths>
@@ -174,11 +173,15 @@ void RemoteInstallerWidget::checkRemoteInstaller(){
 	    QString lastTime=currentTime.toString(Qt::ISODate);
         notificationBody=i18n("Last execution: ")+lastDay+" - "+lastTime+"\n"+i18n("Last action executed: ")+notificationAction;
         QString endBody=i18n("Has finished executing the actions");
-        notification = KNotification::event(QStringLiteral("Run"), endBody, {}, "remote_installer_plugin", nullptr, KNotification::CloseOnTimeout , QStringLiteral("remoteinstaller"));
-        setSubToolTip(notificationBody);
-        setStatus(PassiveStatus);
+        m_notification = new KNotification(QStringLiteral("Run"),KNotification::CloseOnTimeout,this);
+                    m_notification->setComponentName(QStringLiteral("remoteinstaller"));
+                    m_notification->setTitle(endBody);
+                    m_notification->setIconName("remote_installer_plugin");
+                    m_notification->sendEvent();
 
-	 }      	
+	    setSubToolTip(notificationBody);
+        setStatus(PassiveStatus);
+     }      	
 
 
 }	
@@ -223,8 +226,14 @@ void RemoteInstallerWidget::changeTryIconState(QString mode){
 
 	if (show_notification){
 		setSubToolTip(title+notificationAction);
-        notification = KNotification::event(QStringLiteral("Run"), title+notificationAction, {}, "remote_installer_plugin", nullptr, KNotification::CloseOnTimeout , QStringLiteral("remoteinstaller"));
-	}
+	    m_notification = new KNotification(QStringLiteral("Run"),KNotification::CloseOnTimeout,this);
+                m_notification->setComponentName(QStringLiteral("remoteinstaller"));
+                m_notification->setTitle(title+notificationAction);
+                m_notification->setIconName("remote_installer_plugin");
+                m_notification->sendEvent();
+
+
+    }
       
 }
 

@@ -1,0 +1,29 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "juapesai@hotmail.com",
+                "Name": "Juan Ramon Pelegrina"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "Display warnings when an LliureX Remote Installer is running",
+        "Description[ca@valencia]": "Mostra avisos quan LliureX Remote Installer s'està executant",
+        "Description[ca]": "Mostra avisos quan LliureX Remote Installer s'està executant",
+        "Description[en_GB]": "Display warnings when an LliureX Remote Installer is running",
+        "Description[es]": "Muestra avisos cuando LliureX Remote Installer se esta ejecutando",
+        "EnabledByDefault": true,
+        "Icon": "remote_installer_plugin",
+        "Id": "org.kde.plasma.remoteinstaller",
+        "License": "LGPL",
+        "Name": "LliureX Remote Installer",
+        "Name[ca@valencia]": "LliureX Remote Installer",
+        "Name[ca]": "LliureX Remote Installer",
+        "Name[en_GB]": "LliureX Remote Installer",
+        "Name[es]": "LliureX Remote Installer",
+        "Website": "https://lliurex.net/"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
+}
