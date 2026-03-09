@@ -1,10 +1,8 @@
 #include "RemoteInstallerWidget.h"
 #include <KLocalizedString>
-#include <KFormat>
 #include <KNotification>
-#include <KRun>
+
 #include <QTimer>
-#include <QRegularExpression>
 #include <QStandardPaths>
 #include <QDebug>
 #include <QFile>
@@ -12,8 +10,10 @@
 #include <QFileSystemWatcher>
 #include <QTime>
 #include <QDate>
+#include <QThread>
+#include <QPointer>
 
-
+#include <QtConcurrent>
 
 RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     : QObject(parent)
@@ -21,7 +21,6 @@ RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     
 {
     
-	cleanCache();
     WATCH_DIR.setPath(refPath);
     QString sh_token_path=WATCH_DIR.absoluteFilePath("llxremote_sh_token");
     llxremote_sh.setFileName(sh_token_path);
@@ -35,12 +34,30 @@ RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
 
     notificationBody=i18n("Is not running");
     setSubToolTip(notificationBody);
-    initWatcher();
+    startWidget();
    
+}
+
+void RemoteInstallerWidget::startWidget(){
+
+    QPointer<RemoteInstallerWidget>safeThis(this);
+
+    QThreadPool::globalInstance()->start([safeThis]() {
+
+        if (!safeThis){
+            return;
+        }
+
+        safeThis->cleanCache();
+        QMetaObject::invokeMethod(safeThis.data(),[safeThis]() {
+            safeThis->initWatcher();
+         }, Qt::QueuedConnection);
+    });
 }
 
 void RemoteInstallerWidget::cleanCache(){
 
+    qDebug()<<"[LLIUREX-REMOTE-INSTALLER]: Clean cache...";
     user=qgetenv("USER");
     QFile CURRENT_VERSION_TOKEN;
     QDir cacheDir("/home/"+user+"/.cache/plasmashell/qmlcache");
