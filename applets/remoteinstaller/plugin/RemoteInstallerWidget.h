@@ -67,6 +67,7 @@ signals:
  
 private:
 
+    void startWidget();
     void cleanCache();
     QString getInstalledVersion();
     void initWatcher();
