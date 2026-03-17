@@ -9,6 +9,8 @@
 #include <QFile>
 #include <QFileSystemWatcher>
 
+#include <QtQml/qqmlregistration.h>
+
 
 class QTimer;
 class KNotification;
@@ -17,14 +19,7 @@ class KNotification;
 class RemoteInstallerWidget : public QObject
 {
     Q_OBJECT
-
-
-    Q_PROPERTY(TrayStatus status READ status NOTIFY statusChanged)
-    Q_PROPERTY(QString toolTip READ toolTip NOTIFY toolTipChanged)
-    Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
-    Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
-
-    Q_ENUMS(TrayStatus)
+    QML_ELEMENT
 
 public:
     /**
@@ -35,7 +30,15 @@ public:
         PassiveStatus
     };
 
-    RemoteInstallerWidget(QObject *parent = nullptr);
+
+    Q_PROPERTY(TrayStatus status READ status NOTIFY statusChanged)
+    Q_PROPERTY(QString toolTip READ toolTip NOTIFY toolTipChanged)
+    Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
+    Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
+
+    Q_ENUM(TrayStatus)
+
+    explicit RemoteInstallerWidget(QObject *parent = nullptr);
 
     TrayStatus status() const;
     void changeTryIconState (QString mode);
@@ -68,8 +71,6 @@ signals:
 private:
 
     void startWidget();
-    void cleanCache();
-    QString getInstalledVersion();
     void initWatcher();
 
     QTimer *m_timer_run=nullptr;
@@ -87,7 +88,6 @@ private:
     QPointer<KNotification> m_notification;
     QFileSystemWatcher *watcher = nullptr;
     QString refPath="/tmp/.LLXRemoteInstallerClient";
-    QString user;
     QString notificationBody;
     QString notificationAction;
 };
