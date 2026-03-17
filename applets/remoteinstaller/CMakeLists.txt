@@ -6,12 +6,15 @@ plasma_install_package(package org.kde.plasma.remoteinstaller)
 
 #######################################################################################
 # Notes Library
+set(PLUGIN_TARGET "remoteinstallerplugin")
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.remoteinstaller")
-ecm_add_qml_module(remoteinstallerplugin URI org.kde.plasma.private.remoteinstaller)
+ecm_add_qml_module(${PLUGIN_TARGET} URI org.kde.plasma.private.remoteinstaller VERSION 2.0)
 
-target_sources(remoteinstallerplugin PRIVATE
+target_sources(${PLUGIN_TARGET} PRIVATE
     plugin/plugin.cpp
     plugin/RemoteInstallerWidget.cpp
+    plugin/plugin.h
+    plugin/RemoteInstallerWidget.h
 
 )
 
@@ -28,14 +31,15 @@ target_link_libraries(remoteinstallerplugin PRIVATE
 
                       )
 
-ecm_finalize_qml_module(remoteinstallerplugin)
+target_include_directories(${PLUGIN_TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/plugin)
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/remoteinstaller)
-install(TARGETS remoteinstallerplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/remoteinstaller)
+ecm_finalize_qml_module(${PLUGIN_TARGET})
+
+install(TARGETS ${PLUGIN_TARGET} DESTINATION ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/remoteinstaller)
 
 install(FILES "icons/remote_installer_plugin.svg"
-        DESTINATION ${DATAROOTDIR}/usr/share/icons/hicolor/scalable/apps/)
+        DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps/)
 install(FILES "icons/remote_installer_plugin_app.svg"
-        DESTINATION ${DATAROOTDIR}/usr/share/icons/hicolor/scalable/apps/)
+        DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps/)
 install(FILES "knotifications6/remoteinstaller.notifyrc"
-        DESTINATION ${DATAROOTDIR}/usr/share/knotifications6/)   
+        DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})

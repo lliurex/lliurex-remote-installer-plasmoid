@@ -8,7 +8,7 @@ import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.private.remoteinstaller 1.0
+import org.kde.plasma.private.remoteinstaller
 // Item - the most basic plasmoid component, an empty container.
 
 PlasmoidItem {
@@ -41,12 +41,6 @@ PlasmoidItem {
     toolTipMainText: remoteInstallerWidget.toolTip
     toolTipSubText: remoteInstallerWidget.subToolTip
 
-    Component.onCompleted: {
-       Plasmoid.removeAction("configure");
-                
-    }
-
-   
     fullRepresentation: PlasmaComponents3.Page {
         implicitWidth: Kirigami.Units.gridUnit * 12
         implicitHeight: Kirigami.Units.gridUnit * 6
