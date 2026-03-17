@@ -68,8 +68,6 @@ signals:
 private:
 
     void startWidget();
-    void cleanCache();
-    QString getInstalledVersion();
     void initWatcher();
 
     QTimer *m_timer_run=nullptr;
@@ -87,7 +85,6 @@ private:
     QPointer<KNotification> notification;
     QFileSystemWatcher *watcher = nullptr;
     QString refPath="/tmp/.LLXRemoteInstallerClient";
-    QString user;
     QString notificationBody;
     QString notificationAction;
 };

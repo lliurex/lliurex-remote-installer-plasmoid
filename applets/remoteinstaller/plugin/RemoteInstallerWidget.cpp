@@ -10,10 +10,6 @@
 #include <QFileSystemWatcher>
 #include <QTime>
 #include <QDate>
-#include <QThread>
-#include <QPointer>
-
-#include <QtConcurrent>
 
 RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     : QObject(parent)
@@ -31,90 +27,12 @@ RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     QString epi_token_path=WATCH_DIR.absoluteFilePath("llxremote_epi_token");
     llxremote_epi.setFileName(epi_token_path);
 
-
     notificationBody=i18n("Is not running");
     setSubToolTip(notificationBody);
-    startWidget();
+
+    initWatcher();
    
 }
-
-void RemoteInstallerWidget::startWidget(){
-
-    QPointer<RemoteInstallerWidget>safeThis(this);
-
-    QThreadPool::globalInstance()->start([safeThis]() {
-
-        if (!safeThis){
-            return;
-        }
-
-        safeThis->cleanCache();
-        QMetaObject::invokeMethod(safeThis.data(),[safeThis]() {
-            safeThis->initWatcher();
-         }, Qt::QueuedConnection);
-    });
-}
-
-void RemoteInstallerWidget::cleanCache(){
-
-    qDebug()<<"[LLIUREX-REMOTE-INSTALLER]: Clean cache...";
-    user=qgetenv("USER");
-    QFile CURRENT_VERSION_TOKEN;
-    QDir cacheDir("/home/"+user+"/.cache/plasmashell/qmlcache");
-    QString currentVersion="";
-    bool clear=false;
-
-    CURRENT_VERSION_TOKEN.setFileName("/home/"+user+"/.config/remote-installer-widget.conf");
-    QString installedVersion=getInstalledVersion();
-
-    if (!CURRENT_VERSION_TOKEN.exists()){
-        if (CURRENT_VERSION_TOKEN.open(QIODevice::WriteOnly)){
-            QTextStream data(&CURRENT_VERSION_TOKEN);
-            data<<installedVersion;
-            CURRENT_VERSION_TOKEN.close();
-            clear=true;
-        }
-    }else{
-        if (CURRENT_VERSION_TOKEN.open(QIODevice::ReadOnly)){
-            QTextStream content(&CURRENT_VERSION_TOKEN);
-            currentVersion=content.readLine();
-            CURRENT_VERSION_TOKEN.close();
-        }
-
-        if (currentVersion!=installedVersion){
-            if (CURRENT_VERSION_TOKEN.open(QIODevice::WriteOnly)){
-                QTextStream data(&CURRENT_VERSION_TOKEN);
-                data<<installedVersion;
-                CURRENT_VERSION_TOKEN.close();
-                clear=true;
-            }
-        }
-    } 
-    if (clear){
-        if (cacheDir.exists()){
-            cacheDir.removeRecursively();
-        }
-    }   
-
-}
-
-QString RemoteInstallerWidget::getInstalledVersion(){
-
-    QFile INSTALLED_VERSION_TOKEN;
-    QString installedVersion="";
-    
-    INSTALLED_VERSION_TOKEN.setFileName("/var/lib/lliurex-remote-installer-indicator/version");
-
-    if (INSTALLED_VERSION_TOKEN.exists()){
-        if (INSTALLED_VERSION_TOKEN.open(QIODevice::ReadOnly)){
-            QTextStream content(&INSTALLED_VERSION_TOKEN);
-            installedVersion=content.readLine();
-            INSTALLED_VERSION_TOKEN.close();
-        }
-    }
-    return installedVersion;
-
-} 
 
 void RemoteInstallerWidget::initWatcher(){
 
