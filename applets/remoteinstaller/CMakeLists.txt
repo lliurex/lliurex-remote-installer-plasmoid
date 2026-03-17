@@ -19,7 +19,7 @@ target_sources(${PLUGIN_TARGET} PRIVATE
 )
 
 
-target_link_libraries(remoteinstallerplugin PRIVATE
+target_link_libraries(${PLUGIN_TARGET} PRIVATE
                       Qt6::Quick
                       Qt6::Core
                       Qt6::Widgets
