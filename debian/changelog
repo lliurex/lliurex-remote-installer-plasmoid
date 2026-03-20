@@ -1,3 +1,9 @@
+lliurex-remote-installer-indicator (1.10.2) noble; urgency=medium
+
+  * Changed to that cache dosn't have to be cleared on the startup
+
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Fri, 20 Mar 2026 09:15:33 +0100
+
 lliurex-remote-installer-indicator (1.10.1) noble; urgency=medium
 
   * Improved startup
