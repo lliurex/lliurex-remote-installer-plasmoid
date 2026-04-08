@@ -56,7 +56,6 @@ public:
 public slots:
     
     void worker();
-    void checkRemoteInstaller();
 
 signals:
    
@@ -69,8 +68,9 @@ private:
 
     void startWidget();
     void initWatcher();
+    void showEndNotification();
 
-    QTimer *m_timer_run=nullptr;
+    QTimer *m_watcher_timer = nullptr;
     TrayStatus m_status = PassiveStatus;
     QString m_iconName = QStringLiteral("remote_installer_plugin");
     QString m_toolTip;
@@ -81,6 +81,7 @@ private:
     QFile llxremote_deb;
     QFile llxremote_epi;
     QString llxremote_mode;
+    QStringList mode_options={"sh","apt","deb","epi"};
     bool is_working=false;
     QPointer<KNotification> notification;
     QFileSystemWatcher *watcher = nullptr;
