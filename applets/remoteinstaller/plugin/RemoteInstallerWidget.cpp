@@ -13,7 +13,7 @@
 
 RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     : QObject(parent)
-    , m_timer_run(new QTimer(this))
+    ,m_watcher_timer(new QTimer(this))
     
 {
     
@@ -30,6 +30,9 @@ RemoteInstallerWidget::RemoteInstallerWidget(QObject *parent)
     notificationBody=i18n("Is not running");
     setSubToolTip(notificationBody);
 
+    m_watcher_timer->setSingleShot(true);
+    m_watcher_timer->setInterval(500);
+    connect(m_watcher_timer, &QTimer::timeout, this, &RemoteInstallerWidget::worker);
     initWatcher();
    
 }
@@ -45,9 +48,18 @@ void RemoteInstallerWidget::initWatcher(){
 	}else{
 		initWorker=true;
 	}
-	watcher=new QFileSystemWatcher(this);
-	connect(watcher,SIGNAL(directoryChanged(QString)),this,SLOT(worker()));
-	watcher->addPath(refPath);
+
+    if (!watcher) {
+        watcher = new QFileSystemWatcher(this);
+        connect(watcher, &QFileSystemWatcher::directoryChanged, [this](const QString &path){
+            Q_UNUSED(path);
+            m_watcher_timer->start(); 
+        });
+    }
+    if (watcher->directories().isEmpty()) {
+    	watcher->addPath(refPath);
+    }
+
 	if (initWorker){
 		worker();
 	}
@@ -60,66 +72,63 @@ void RemoteInstallerWidget::worker(){
 	if (RemoteInstallerWidget::llxremote_sh.exists() || RemoteInstallerWidget::llxremote_apt.exists() || RemoteInstallerWidget::llxremote_deb.exists() || RemoteInstallerWidget::llxremote_epi.exists()) {
 		isAlive();
 	}else{
-		setStatus(PassiveStatus);
+		if (is_working){
+			showEndNotification();
+		}else{
+			setStatus(PassiveStatus);
+		}
 	}
 
 }    
 
-
 void RemoteInstallerWidget::isAlive(){
-
-   llxremote_mode="";
+  
+   	llxremote_mode="";
 
 	if (RemoteInstallerWidget::llxremote_sh.exists()){
 		llxremote_mode="sh";
+	}else if (RemoteInstallerWidget::llxremote_apt.exists()){
+		llxremote_mode="apt";
+	}else if (RemoteInstallerWidget::llxremote_deb.exists()){
+		llxremote_mode="deb";
+	}else if (RemoteInstallerWidget::llxremote_epi.exists()){
+		llxremote_mode="epi";
+	}
 
-	}else{
-		if (RemoteInstallerWidget::llxremote_apt.exists()){
-			llxremote_mode="apt";
-		}else{
-			if (RemoteInstallerWidget::llxremote_deb.exists()){
-				llxremote_mode="deb";
-			}else{
-				if (RemoteInstallerWidget::llxremote_epi.exists()){
-					llxremote_mode="epi";
-				}
-			}
-		}
-	}		
+	if (!llxremote_mode.isEmpty()){
+		changeTryIconState(llxremote_mode);
+		if (!is_working){
+    		is_working=true;
+    	}
+    }else{
+    	if (is_working){
+    		showEndNotification();
+    	}else{
+    		setStatus(PassiveStatus);
+    	}
 
-	changeTryIconState(llxremote_mode);
-    
-    if (!is_working){
-    	is_working=true;
-    	connect(m_timer_run, &QTimer::timeout, this, &RemoteInstallerWidget::checkRemoteInstaller);
-    	m_timer_run->start(5000);
-    	checkRemoteInstaller();
-    }
+    }	
 
 }
 
-void RemoteInstallerWidget::checkRemoteInstaller(){
+void RemoteInstallerWidget::showEndNotification(){
 
-	if (!RemoteInstallerWidget::llxremote_sh.exists() && !RemoteInstallerWidget::llxremote_apt.exists() && !RemoteInstallerWidget::llxremote_deb.exists() && !RemoteInstallerWidget::llxremote_epi.exists()) {
-	 	m_timer_run->stop();
-	    is_working=false;
-	    QDate currentDate=QDate::currentDate();
-	    QString lastDay=currentDate.toString(Qt::ISODate);
-	    QTime currentTime=QTime::currentTime();
-	    QString lastTime=currentTime.toString(Qt::ISODate);
-        notificationBody=i18n("Last execution: ")+lastDay+" - "+lastTime+"\n"+i18n("Last action executed: ")+notificationAction;
-        QString endBody=i18n("Has finished executing the actions");
-        m_notification = new KNotification(QStringLiteral("Run"),KNotification::CloseOnTimeout,this);
-                    m_notification->setComponentName(QStringLiteral("remoteinstaller"));
-                    m_notification->setTitle(endBody);
-                    m_notification->setIconName("remote_installer_plugin");
-                    m_notification->sendEvent();
+ 	m_watcher_timer->stop();
+    is_working=false;
+    QDate currentDate=QDate::currentDate();
+    QString lastDay=currentDate.toString(Qt::ISODate);
+    QTime currentTime=QTime::currentTime();
+    QString lastTime=currentTime.toString(Qt::ISODate);
+    notificationBody=i18n("Last execution: ")+lastDay+" - "+lastTime+"\n"+i18n("Last action executed: ")+notificationAction;
+    QString endBody=i18n("Has finished executing the actions");
+    m_notification = new KNotification(QStringLiteral("Run"),KNotification::CloseOnTimeout,this);
+    m_notification->setComponentName(QStringLiteral("remoteinstaller"));
+    m_notification->setTitle(endBody);
+    m_notification->setIconName("remote_installer_plugin");
+    m_notification->sendEvent();
 
-	    setSubToolTip(notificationBody);
-        setStatus(PassiveStatus);
-     }      	
-
-
+	setSubToolTip(notificationBody);
+    setStatus(PassiveStatus);
 }	
 
 
@@ -139,26 +148,29 @@ void RemoteInstallerWidget::changeTryIconState(QString mode){
      
     bool show_notification=false;
 
-	if (mode=="sh"){
-		notificationAction=i18n("EXECUTABLES");
-		show_notification=true;
-	       
-	}else{
-	  	if (mode=="apt"){
+
+	switch(mode_options.indexOf(mode)){
+		case 0:{
+			notificationAction=i18n("EXECUTABLES");
+			show_notification=true;
+	    	break;
+	    }
+		case 1:{
 			notificationAction=i18n("APT");
 	   		show_notification=true;
-	   	}else{
-	   		if (mode=="deb"){
-				notificationAction=i18n("DEB");
-	  			show_notification=true;
- 	        }else{
-	        	if (mode=="epi"){
-	        		notificationAction=i18n("ZMD");
-	  				show_notification=true;
-	        	}
-	        }
-	   	}	
-	}
+	   		break;
+	   	}
+	   	case 2:{
+			notificationAction=i18n("DEB");
+	  		show_notification=true;
+ 	        break;
+ 	    }
+	    case 3:{
+	        notificationAction=i18n("ZMD");
+	  		show_notification=true;
+	        break;
+	    }
+	}	
 
 	if (show_notification){
 		setSubToolTip(title+notificationAction);
